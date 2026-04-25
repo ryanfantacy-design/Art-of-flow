@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAO Study Tracker</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app">
+    <section class="hero">
+      <div class="hero-copy-wrap">
+        <p class="eyebrow">FAO Exam</p>
+        <h1>Study Tracker</h1>
+        <p class="subtext">Daily progress, weekly review, topic coverage, mock tests, and study phases in one focused workspace.</p>
+        <div class="hero-tags">
+          <span class="hero-tag">Daily Score</span>
+          <span class="hero-tag">Topic Coverage</span>
+          <span class="hero-tag">Mock Analysis</span>
+        </div>
+      </div>
+      <div class="hero-side">
+        <div class="date-badge" id="todayLabel"></div>
+        <div class="hero-meter">
+          <span class="label">Momentum</span>
+          <strong id="heroMomentum">Keep Going</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-grid">
+      <article class="card">
+        <p class="label">Total Score</p>
+        <div class="score-row">
+          <span class="score" id="scoreValue">0</span>
+          <span class="score-total">/ <span id="scoreMax">100</span></span>
+        </div>
+        <p class="status" id="statusMessage">Improve</p>
+      </article>
+
+      <article class="card">
+        <p class="label">Daily Streak</p>
+        <div class="score-row">
+          <span class="score" id="streakValue">0</span>
+          <span class="score-total">days</span>
+        </div>
+        <p class="subtext small">Counts full-score days only.</p>
+      </article>
+    </section>
+
+    <section class="card">
+      <div class="section-head">
+        <div>
+          <p class="label">Daily Tasks</p>
+          <h2>Checklist</h2>
+        </div>
+        <button id="resetButton" type="button">Reset Day</button>
+      </div>
+      <div class="task-list" id="taskList"></div>
+    </section>
+
+    <section class="card">
+      <div class="section-head">
+        <div>
+          <p class="label">Edit Tasks</p>
+          <h2>Manage Task List</h2>
+        </div>
+        <button id="addTaskButton" type="button">Add New Task</button>
+      </div>
+      <div class="editor-list" id="editorList"></div>
+    </section>
+
+    <section class="card">
+      <div class="section-head">
+        <div>
+          <p class="label">Weekly Summary</p>
+          <h2>Last 7 Days</h2>
+        </div>
+      </div>
+      <div class="weekly-stats">
+        <div class="mini-stat">
+          <span class="label">Weekly Total</span>
+          <strong id="weeklyTotal">0</strong>
+        </div>
+        <div class="mini-stat">
+          <span class="label">Weekly Average</span>
+          <strong id="weeklyAverage">0</strong>
+        </div>
+      </div>
+      <div class="graph-card">
+        <div class="graph-head">
+          <div>
+            <p class="label">Weekly Progress Graph</p>
+            <h3>Score Trend</h3>
+          </div>
+        </div>
+        <div class="graph-bars" id="weeklyGraph"></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Completed</th>
+              <th>Score</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="weeklySummaryBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-head">
+        <div>
+          <p class="label">Daily Journal</p>
+          <h2>Write Your Notes</h2>
+        </div>
+      </div>
+      <div class="journal-card">
+        <p class="subtext small">Your note is saved for the current date, so you can keep a day-wise record.</p>
+        <textarea id="journalEntry" class="journal-input" placeholder="Write what you studied today, what went well, what needs improvement, and your plan for tomorrow."></textarea>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-head">
+        <div>
+          <p class="label">Study Phases</p>
+          <h2>70-Day Plan</h2>
+        </div>
+      </div>
+      <div class="phase-current">
+        <span class="label">Current Phase</span>
+        <strong id="currentPhase">Phase 1</strong>
+      </div>
+      <div class="phase-grid" id="phaseGrid"></div>
+    </section>
+
+    <section class="card">
+      <div class="section-head">
+        <div>
+          <p class="label">Weekly Review</p>
+          <h2>10-Week Review Table</h2>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Week</th>
+              <th>Total Score</th>
+              <th>Avg Score</th>
+              <th>Mock Score</th>
+              <th>Weak Area</th>
+              <th>Fix Plan</th>
+            </tr>
+          </thead>
+          <tbody id="weeklyReviewBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-head">
+        <div>
+          <p class="label">Topic Checklist</p>
+          <h2>Subject-Wise Coverage</h2>
+        </div>
+      </div>
+      <div class="topic-summary-grid" id="topicSummaryGrid"></div>
+      <div class="topic-manager">
+        <div class="topic-manager-copy">
+          <p class="label">Manage Coverage</p>
+          <h3>Add Or Edit Subjects And Topics</h3>
+          <p class="subtext small">Change subject names, rename topics, add more topics, or remove anything you no longer need.</p>
+        </div>
+        <button id="addTopicButton" type="button">Add Topic</button>
+      </div>
+      <div class="topic-editor-list" id="topicEditorList"></div>
+      <div class="topic-groups" id="topicGroups"></div>
+    </section>
+
+    <section class="card">
+      <div class="section-head">
+        <div>
+          <p class="label">Mock Test Log</p>
+          <h2>Track Performance</h2>
+        </div>
+        <button id="addMockTestButton" type="button">Add Test</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Test No</th>
+              <th>Score</th>
+              <th>Accuracy</th>
+              <th>Weak Area</th>
+              <th>Improvement</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="mockTestsBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
